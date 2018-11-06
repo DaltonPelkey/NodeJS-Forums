@@ -1,0 +1,392 @@
+body, html {
+    background-color: #36393F;
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    min-width: 1000px;
+}
+
+.container {
+    min-width: 900px;
+    max-width: 1000px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+}
+
+.tooltip {
+    box-shadow: none;
+    border: none !important;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-weight: 300;
+    color: #f5f5f5;
+    background: #000;
+    font-size: 14px;
+    z-index: 999999;
+}
+
+#main_header {
+    width: 100%;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+#main_header .relative_reset {
+    width: 100%;
+    position: relative;
+}
+
+#main_header .relative_reset input {
+    position: absolute;
+    left: 50%;
+    min-width: 150px;
+    transform: translateX(-50%);
+    padding: 8px 10px;
+    margin-top: 15px;
+    background: none;
+    outline: none;
+    border: 2px solid #fff;
+    border-radius: 44px;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 110%;
+    font-weight: 500;
+    color: #fff;
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+    transition: background 0.2s, color 0.2s;
+
+    -webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+}
+
+#main_header .relative_reset input:focus {
+    background: #fff;
+    color: inherit;
+    text-shadow: none;
+}
+
+#main_header .main_header__right_block {
+    float: right;
+    margin-right: 15px;
+}
+
+#main_header .main_header__left_block {
+    float: left;
+    margin-left: 7px;
+}
+
+#main_header .main_header__left_block svg {
+    margin-top: 7px;
+    height: 50px;
+    width: 50px;
+    display: block;
+    cursor: pointer;
+}
+
+#main_header .main_header__right_block button {
+    background: none;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-family: 'Roboto', Arial, Sans-Serif;
+    text-shadow: 0px 0px 2px rgba(0,0,0,1);
+    padding: 20px 10px;
+    cursor: pointer;
+}
+
+#main_header .main_header__signin {
+    font-weight: 400;
+    font-size: 13px;
+}
+
+#main_header .main_header__signup {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+#main_header .main_header__menu {
+    display: block;
+    margin-top: 10px;
+    position: relative;
+}
+
+#main_header .main_header__menu .main_header__avatar {
+    outline: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    margin-right: 15px;
+    background-color: #fff;
+}
+
+#main_header .main_header__menu .main_header__dropdown_btn {
+    outline: none;
+    border: none;
+    color: #fff;
+    height: 40px;
+    display: inline-block;
+    font-size: 25px;
+    position: relative;
+}
+
+#main_header .main_header__menu .main_header__dropdown_btn i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: inline-block;
+}
+
+#main_header .main_header__menu .main_header__avatar_tooltip {
+    display: block;
+    opacity: 0;
+    background: #fff;
+    position: absolute;
+    left: -115%;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px 6px;
+    height: 26px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Roboto", Arial, Sans-serif;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+#main_header .main_header__menu .main_header__avatar_tooltip:after {
+    left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: none;
+	border-left-color: #fff;
+	border-width: 6px;
+	margin-top: -6px;
+}
+
+#main_header .main_header__menu .main_header__avatar:hover + .main_header__avatar_tooltip  {
+    opacity: 1;
+}
+
+#main_header .main_header__menu .main_header__dropdown_menu {
+    display: none;
+    background: #fff;
+    border-radius: 4px;
+    padding: 5px 20px;
+    min-width: 100px;
+    position: absolute;
+    top: 130%;
+    right: 0;
+    font-weight: 400;
+    font-family: "Roboto", Arial, Sans-serif;
+    line-height: 25px;
+    text-align: right;
+}
+
+#main_header .main_header__menu .main_header__dropdown_menu ul {
+    width: 100%;
+}
+
+#main_header .main_header__menu .main_header__dropdown_menu ul li {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+#main_header .main_header__menu .main_header__dropdown_menu ul li:last-of-type {
+    border: none;
+}
+
+#main_header .main_header__menu .main_header__dropdown_menu .main_header__dropdown_item a {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    padding: 15px 0;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+#main_header .main_header__menu .main_header__dropdown_menu .main_header__dropdown_item a:hover {
+    padding-right: 8px;
+}
+
+#settings_modal {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 99999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    display: none;
+}
+
+#settings_modal .settings_modal__close_btn {
+    position: fixed;
+    top: 20px;
+    right: 10%;
+    background: none;
+    outline: none;
+    border: none;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #36393F;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+#settings_modal .settings_modal__close_btn:hover {
+    background: rgba(240,240,240,0.5);
+}
+
+#settings_modal .settings_modal__save_btn {
+    position: fixed;
+    bottom: 20px;
+    right: 10%;
+    background: none;
+    outline: none;
+    border: none;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    background: #50E486;
+    cursor: pointer;
+    padding: 12px 23px;
+    border-radius: 44px;
+    transition: background 0.3s;
+    display: none;
+}
+
+#settings_modal .settings_modal__save_btn span {
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+#settings_modal .settings_modal__save_btn.disabled {
+    background-color: #19A54C;
+    cursor: not-allowed;
+}
+
+#settings_modal .settings_modal__save_btn:hover {
+    background: #20D261;
+}
+
+#settings_modal .relative_reset {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#settings_modal .settings_container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    font-weight: 400;
+    color: #36393F;
+    font-family: "Roboto", Arial, Sans-serif;
+    position: relative;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+#settings_modal .settings_container .main_heading {
+    width: 100%;
+    font-weight: 700;
+    font-size: 55px;
+    margin: 70px 0 20px 0;
+}
+
+#settings_modal .settings_container .block_heading {
+    width: 100%;
+    font-weight: 500;
+    color: #565F70;
+    font-size: 40px;
+    margin: 70px 0 20px 0;
+}
+
+#settings_modal .settings_container .block_divider {
+    width: 100%;
+    display: block;
+    height: 2px;
+    background: #36393F;
+    opacity: 0.3;
+    margin: 30px 0;
+}
+
+#settings_modal .settings_container .settings_section .section_spacer {
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+    height: 1px;
+}
+
+#settings_modal .settings_container .settings_section input, #settings_modal .settings_container .settings_section textarea {
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #E3E3E3;
+    width: 50%;
+    margin-top: 20px;
+    display: block;
+}
+
+#settings_modal .settings_container .settings_section span.input_container {
+    position: relative;
+}
+
+#settings_modal .settings_container .settings_section span.input_container.invalid_url:after {
+    content: "Invalid URL";
+    color: #F94949;
+    font-size: 12px;
+}
+
+#settings_modal .settings_container .settings_section span.input_container.invalid_image:after {
+    content: "Invalid image (Supported formats: png, jpg, jpeg)";
+    color: #F94949;
+    font-size: 12px;
+}
+
+#settings_modal .settings_container .settings_section span.input_container.invalid_ign:after {
+    content: "Invalid Minecraft username. (Must be 3-16 characters long, be alphanumeric, and may contain underscores)";
+    color: #F94949;
+    font-size: 12px;
+}
+
+#settings_modal .settings_container .settings_section textarea {
+    max-width: 50%;
+    min-width: 50%;
+    min-height: 70px;
+}
+
+#settings_modal .settings_container .settings_section label {
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 4px 0;
+}

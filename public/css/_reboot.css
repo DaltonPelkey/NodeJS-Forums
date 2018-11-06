@@ -1,0 +1,13 @@
+html, body, p, ul, li, a, button, h1, h2, h3, h4, h5, h6, select, textarea {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}

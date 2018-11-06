@@ -1,0 +1,30 @@
+{
+  "name": "indica",
+  "version": "1.0.0",
+  "description": "Main website for Indica Corp",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "author": "Dalton",
+  "license": "ISC",
+  "dependencies": {
+    "base64url": "^3.0.0",
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-mysql-session": "^2.0.1",
+    "express-session": "^1.15.6",
+    "gm": "^1.23.1",
+    "mailgun-js": "^0.22.0",
+    "moment": "^2.22.2",
+    "mysql": "^2.16.0",
+    "request": "^2.88.0",
+    "socket.io": "^2.1.1",
+    "socket.io-redis": "^5.2.0"
+  }
+}

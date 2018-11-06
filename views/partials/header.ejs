@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %> | <%= app_name %></title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    <link href="/css/libs/jqueryui.theme.css" rel="stylesheet" type="text/css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=1">
+    <link rel="manifest" href="/site.webmanifest?v=1">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=1" color="#26a69a">
+    <link rel="shortcut icon" href="/favicon.ico?v=1">
+    <meta name="apple-mobile-web-app-title" content="<%= app_name %>">
+    <meta name="application-name" content="<%= app_name %>">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#26a69a">
+
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+    <script src="/js/libs/moment.min.js"></script>
+    <script src="/js/libs/jquery.mask.min.js"></script>
+
+    <script>
+        $(document).tooltip({
+            classes: {
+                "ui-tooltip": "tooltip",
+                "ui-tooltip-content": "tooltip_content"
+            },
+            position: {
+                my: "left bottom-5",
+                at: "left top",
+                collision: 'flipfit'
+            },
+            show: {
+                effect: 'fade',
+                delay: 600,
+                duration: 200
+            },
+            hide: 200
+        });
+    </script>
+
+    <link href="/css/_reboot.css" rel="stylesheet" type="text/css">
+    <link href="/css/header.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="main_header">
+    <div class="main_header__left_block">
+        <a href="/">
+            <svg height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" version="1.1" viewBox="0 0 1024 1024">
+                <g id="Bottom">
+                    <path d="M189.706+792L833.294+792C846.939+792+858+800.954+858+812L858+871C858+882.046+846.939+891+833.294+891L189.706+891C176.061+891+165+882.046+165+871L165+812C165+800.954+176.061+792+189.706+792Z" opacity="1" fill="#fff"/>
+                </g>
+                <g id="Top">
+                    <path d="M180.556+132L842.444+132C851.036+132+858+140.954+858+152L858+211C858+222.046+851.036+231+842.444+231L180.556+231C171.964+231+165+222.046+165+211L165+152C165+140.954+171.964+132+180.556+132Z" opacity="1" fill="#fff"/>
+                </g>
+                <g id="Left">
+                    <path d="M185+165L244+165C255.046+165+264+172.675+264+182.143L264+345.857C264+355.325+255.046+363+244+363L185+363C173.954+363+165+355.325+165+345.857L165+182.143C165+172.675+173.954+165+185+165Z" opacity="1" fill="#fff"/>
+                </g>
+                <g id="Right">
+                    <path d="M779+660L838+660C849.046+660+858+668.954+858+680L858+838C858+849.046+849.046+858+838+858L779+858C767.954+858+759+849.046+759+838L759+680C759+668.954+767.954+660+779+660Z" opacity="1" fill="#fff"/>
+                    <path d="M482+264L541+264C552.046+264+561+272.954+561+284L561+739C561+750.046+552.046+759+541+759L482+759C470.954+759+462+750.046+462+739L462+284C462+272.954+470.954+264+482+264Z" opacity="1" fill="#fff"/>
+                </g>
+            </svg>
+        </a>
+    </div>
+    <div class="relative_reset">
+        <input type="text" name="search" value="Search" autocomplete="off">
+    </div>
+    <div class="main_header__right_block">
+        <% if (user && user.user_id) { %>
+            <div class="main_header__menu">
+                <button class="main_header__avatar" onclick="window.location = '/profile/<%= user.username %>'" style="background-image: url('<%= user.avatar %>')"></button>
+                <div class="main_header__avatar_tooltip">
+                    <span><%= user.username %></span>
+                </div>
+                <button class="main_header__dropdown_btn"><i class="fas fa-angle-down"></i></button>
+                <div class="main_header__dropdown_menu">
+                    <ul>
+                        <li class="main_header__dropdown_item"><a href="/forums">Forums</a></li>
+                        <li class="main_header__dropdown_item"><a href="javascript:void(0)" id="settings_btn">Settings</a></li>
+                        <li class="main_header__dropdown_item"><a href="/account/logout">Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        <% } else { %>
+            <button class="main_header__signin" onclick="window.location='/account/login'">login</button>
+            <button class="main_header__signup" onclick="window.location='/account/register'">Register</button>
+        <% } %>
+    </div>
+</div>
+
+<div id="settings_modal">
+    <div class="relative_reset">
+        <div class="settings_container">
+            <button class="settings_modal__close_btn" id="close_settings_modal">close <i class="fas fa-times"></i></button>
+            <button class="settings_modal__save_btn" id="save_settings_button">save changes <span><i class="far fa-save"></i></span></button>
+
+            <form id="settings_form">
+                <p class="main_heading">Settings</p>
+                <p class="block_heading">Profile</p>
+                <span class="block_divider"></span>
+                <div class="settings_section">
+                    <span class="input_container"><input name="avatar" type="text" placeholder="Profile Photo" class="image_input"></span>
+                    <span class="input_container"><input name="cover" type="text" placeholder="Cover Photo" class="image_input"></span>
+                    <label>Input the URL of an image. (Ex: http://placehold.it/500/500)</label>
+
+                    <span class="section_spacer"></span>
+                    <textarea name="bio" placeholder="Bio"><%= user.bio %></textarea>
+                    <label>Input your profile bio. (Max 200 characters)</label>
+
+                    <span class="section_spacer"></span>
+                    <span class="input_container"><input name="minecraft_username" type="text" placeholder="Minecraft Username" <% if (user.minecraft_username) { %>value="<%= user.minecraft_username %>"<% } %>></span>
+                    <label>Input your Minecraft username. (Case sensitive)</label>
+
+                    <span class="section_spacer"></span>
+                    <span class="input_container"><input class="date_picker" name="birthday" type="text" <% if (user.birthday) { %>data-birthday="<%= user.birthday %>"<% } %>></span>
+                    <label>Input your birthday.</label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/header.js"></script>

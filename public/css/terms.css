@@ -1,0 +1,124 @@
+#back_button {
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    background: none;
+    outline: none;
+    border: none;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+#back_button:hover {
+    background: rgba(240,240,240,0.3);
+}
+
+#back_button i {
+    padding-right: 10px;
+}
+
+/*
+ CSS for the main interaction
+*/
+.tabset > input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+}
+
+body {
+  font: 16px/1.5em "Roboto", Helvetica, sans-serif;
+  color: #333;
+  font-weight: 300;
+}
+
+p, li {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    margin-top: 25px;
+    font-size: 23px;
+}
+
+li {
+    margin-top: 25px;
+}
+
+a {
+    color: #3399FF;
+}
+
+.tabset {
+    margin: 80px auto;
+    width: 70%;
+    max-width: 820px;
+    min-width: 700px;
+}
+
+.tabset > label {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px 25px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabset > label::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  width: 22px;
+  height: 4px;
+  background: #8d8d8d;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+  color: #06c;
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background: #06c;
+}
+
+.tabset > input:checked + label {
+  border-color: #ccc;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+
+.tab-panel {
+  padding: 30px 0;
+  border-top: 1px solid #ccc;
+}

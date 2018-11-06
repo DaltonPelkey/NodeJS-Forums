@@ -1,0 +1,62 @@
+<% include ../partials/header %>
+<link rel="stylesheet" type="text/css" href="/css/profile.css">
+
+<div id="cover" style="background-image: url('<%= profile.cover %>')">
+
+</div>
+
+<div class="container">
+    <div id="profile_card">
+        <div class="profile_card__avatar" style="background-image: url('<%= profile.avatar %>')">
+            <div id="ribbon-container">
+                <a href="javascript:void(0)" class="<%= profile.forum_role.toLowerCase() %>"><%= profile.forum_role %></a>
+            </div>
+            <div class="profile_card__username">
+                <p><%= profile.username %></p>
+                <p class='profile_card__last_seen'>Last seen <span class="format_date" data-timestamp="<%= profile.last_seen %>"></span></p>
+            </div>
+        </div>
+        <div class="profile_card__body">
+            <p class="heading">About</p>
+            <p class="content"><%= profile.bio %></p>
+            <span class="seperator"></span>
+            <div class="info">
+                <p>Followers: <span id="followCount"><%= profile.followCounts.follower %></span></p>
+                <p>Following: <span><%= profile.followCounts.following %></span></p>
+            </div>
+            <span class="seperator"></span>
+            <div class="info">
+                <p>Joined: <span class="format_date" data-timestamp="<%= profile.date_created %>"></span></p>
+                <p>Birthday: <span class="format_date" data-timestamp="<%= profile.birthday %>" data-format="MMMM Do YYYY" data-local="true"></span></p>
+            </div>
+            <span class="seperator"></span>
+            <div class="info">
+                <p>IGN: <span><%= profile.minecraft_username ? profile.minecraft_username : 'N/A' %></span></p>
+            </div>
+        </div>
+    </div>
+    <div class="profile_body">
+        <div class="follow_button">
+            <button id="follow_button"
+                data-to-id="<%= profile.id %>"
+                data-from-id="<%= user && user.user_id ? user.user_id : false %>"
+                data-action="<% if (doesFollow) { %>unfollow<% } else { %>follow<% } %>"
+                class="<% if (user && user.user_id && user.user_id == profile.id) { %>disabled<% } %>"><% if (doesFollow) { %>unfollow<% } else { %>follow<% } %></button>
+        </div>
+        <div class="right_block">
+            <div class="sub_container breadcrumb_container">
+                <div class="breadcrumbs">
+                    <a href="/">Home</a>
+                    <span class="slant"></span>
+                    <a href="/profile/<%= profile.username %>"><%= profile.username %></a>
+                </div>
+            </div>
+            <!-- <div class="sub_container">
+
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<script src="/js/profile.js"></script>
+<% include ../partials/footer %>

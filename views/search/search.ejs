@@ -1,0 +1,41 @@
+<% include ../partials/header %>
+<link rel="stylesheet" type="text/css" href="/css/search.css">
+<script src="/js/libs/masonry.min.js"></script>
+
+<div id="cover">
+    <div class="search_bar_container">
+        <div class="search_bar">
+            <p>Search <%= app_name %></p>
+            <input name="search" type="text" value="<%= q %>">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="loading">
+        <img src="/assets/icons/loading.svg">
+    </div>
+    <div class="content">
+        <% if (results && results.length > 0) { %>
+            <p class="section_title">Members</p>
+            <div class="section">
+                <% results.forEach(function(e) { %>
+                    <div class="user_card" onclick="window.location = '/profile/<%= e.username %>'" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('<%= e.cover %>')">
+                        <div class="column">
+                            <div class="avatar" style="background-image: url('<%= e.avatar %>')"></div>
+                        </div>
+                        <div class="column">
+                            <p><%= e.username %></p>
+                            <p><%= e.bio %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <p class="section_title">No results found</p>
+        <% } %>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<% include ../partials/footer %>

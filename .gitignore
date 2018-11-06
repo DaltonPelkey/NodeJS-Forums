@@ -1,0 +1,7 @@
+.env
+node_modules/
+public/assets/profiles/
+certs/
+misc/
+imports/
+views/terms.ejs

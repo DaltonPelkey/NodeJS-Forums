@@ -1,0 +1,360 @@
+body {
+    background-image: url('/assets/backgrounds/minecraft-shore.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#back_button {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    background: none;
+    outline: none;
+    border: none;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+#back_button:hover {
+    background: rgba(240,240,240,0.3);
+}
+
+#back_button i {
+    padding-right: 10px;
+}
+
+#register_container {
+    width: 50%;
+    max-width: 800px;
+    height: 530px;
+    min-width: 350px;
+    background: #fff;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.relative_reset {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#error_box {
+    width: 400px;
+    min-height: 70px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    border-top: 4px solid #F92929;
+    z-index: 100;
+    overflow: hidden;
+    border-radius: 4px;
+    display: none;
+
+    -webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+}
+
+#error_box .error_box__header {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#error_box .error_box__close_btn {
+    float: right;
+    color: #aaa;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 6px 10px 0 0;
+    cursor: pointer;
+}
+
+#error_box .error_box__body {
+    padding: 6px 30px 6px 6px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+
+    font-family: "Roboto", Arial, Sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+#error_box .error_box__body p {
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+#error_box .error_box__body ul li {
+    margin: 4px 0;
+    position: relative;
+    border-left: 3px solid #aaa;
+    padding-left: 5px;
+}
+
+#register_container .register_container__header {
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: -50px;
+}
+
+#register_container .register_container__header p {
+    text-align: center;
+    color: white;
+    font-size: 50px;
+    font-weight: 700;
+    font-family: 'Roboto Mono', Arial, Sans-serif;
+    text-shadow: 0px 0px 2px rgba(0,0,0,1);
+}
+
+#register_container .register_container__body {
+    padding: 40px 40px 30px 40px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#register_container .register_container__body p {
+    width: 100%;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: "Roboto", Arial, Sans-serif;
+    margin-bottom: 55px;
+    color: #454951;
+    text-align: center;
+}
+
+#register_container .register_container__body p span {
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Roboto", Arial, Sans-serif;
+}
+
+#register_container .register_container__body form  {
+    width: 100%;
+}
+
+#register_container .register_container__body form label {
+    width: 100%;
+    display: block;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 13px;
+    padding-bottom: 5px;
+}
+
+#register_container .register_container__body form input {
+    width: 100%;
+    display: block;
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 9px 14px;
+    box-sizing: border-box;
+    transition: 0.4s;
+    background: transparent;
+}
+
+#register_container .register_container__body form .input_container {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 15px 0;
+}
+
+#register_container .register_container__body form .input_container__group {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#register_container .register_container__body form .input_container__group .input_container {
+    position: relative;
+    width: 49%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+#register_container .register_container__body form .input_container__group .input_container:first-of-type {
+    float: left;
+}
+#register_container .register_container__body form .input_container__group .input_container:last-of-type {
+    float: right;
+}
+
+#register_container .register_container__body .register_container__register_btn {
+    width: 40%;
+    min-width: 175px;
+    max-width: 200px;
+    padding: 10px 20px;
+    outline: none;
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 20px 0 0 auto;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 15px;
+}
+
+#register_container .register_container__body .register_container__register_btn:hover {
+    border-color: #828894;
+}
+
+#register_container .register_container__body .register_container__register_btn span {
+    padding-left: 10px;
+}
+
+#register_container .register_container__body .register_container__register_btn.disabled {
+    cursor: not-allowed;
+}
+
+#register_container .register_container__body .register_container__register_btn.disabled:hover {
+    border-color: #ccc;
+}
+
+#register_container .register_container__body .register_container__login_btn {
+    padding-top: 10px;
+    margin-top: 10px;
+    display: block;
+    transition: all 0.3s;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#register_container .register_container__body .register_container__login_btn a {
+    color: #3399ff;
+    font-weight: 700;
+}
+
+#register_container .register_container__body .register_container__terms {
+    padding-top: 10px;
+    margin-top: 30px;
+    display: block;
+    transition: all 0.3s;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#register_container .register_container__body .register_container__terms a {
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #3399FF;
+}
+
+/* BEGIN INPUT EFFECT */
+#register_container .register_container__body form input ~ .focus-border:before,
+#register_container .register_container__body form input ~ .focus-border:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3399FF;
+    transition: 0.3s;
+}
+
+#register_container .register_container__body form input ~ .focus-border.error:before,
+#register_container .register_container__body form input ~ .focus-border.error:after {
+    background-color: #F92929;
+}
+
+#register_container .register_container__body form input ~ .focus-border:after {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+}
+
+#register_container .register_container__body form input ~ .focus-border i:before,
+#register_container .register_container__body form input ~ .focus-border i:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background-color: #3399FF;
+    transition: 0.4s;
+}
+
+#register_container .register_container__body form input ~ .focus-border.error i:before,
+#register_container .register_container__body form input ~ .focus-border.error i:after {
+    background-color: #F92929;
+}
+
+#register_container .register_container__body form input ~ .focus-border i:after {
+    left: auto;
+    right: 0;
+    top: auto;
+    bottom: 0;
+}
+
+#register_container .register_container__body form input:focus ~ .focus-border:before,
+#register_container .register_container__body form input:focus ~ .focus-border:after,
+#register_container .register_container__body form input.has-content ~ .focus-border:before,
+#register_container .register_container__body form input.has-content ~ .focus-border:after {
+    width: 100%;
+    transition: 0.3s;
+}
+
+#register_container .register_container__body form input:focus ~ .focus-border i:before,
+#register_container .register_container__body form input:focus ~ .focus-border i:after,
+#register_container .register_container__body form input.has-content ~ .focus-border i:before,
+#register_container .register_container__body form input.has-content ~ .focus-border i:after {
+    height: 100%;
+    transition: 0.4s;
+}
+
+#register_container .register_container__body form input ~ label {
+    position: absolute;
+    left: 14px;
+    width: 100%;
+    top: 10px;
+    color: #aaa;
+    transition: 0.3s;
+    z-index: -1;
+    letter-spacing: 0.5px;
+    font-family: "Roboto", Arial, Sans-serif;
+}
+
+#register_container .register_container__body form input:focus ~ label,
+#register_container .register_container__body form input.has-content ~ label {
+    top: -18px;
+    left: 0;
+    font-size: 12px;
+    color: #3399FF;
+    transition: 0.3s;
+}
+
+#register_container .register_container__body form input ~ label.error {
+    color: #F92929;
+}
+/* END INPUT EFFECT */

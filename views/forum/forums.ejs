@@ -1,0 +1,139 @@
+<% include ../partials/header %>
+<link rel="stylesheet" type="text/css" href="/css/forums.css">
+
+<!-- Variable definitions for external script -->
+<script>
+    var currentUser = <%- JSON.stringify(user) %>;
+    var perms = <%- JSON.stringify(perms) %>;
+</script>
+
+<div id="cover"></div>
+
+<div id="profile_card">
+    <div class="profile_card__avatar"><span></span></div>
+    <div class="profile_card__info">
+        <p class="profile_card__username">Username</p>
+        <p class="profile_card__forum_role">Member</p>
+        <p class="profile_card__bio">This user has not set their bio yet.</p>
+        <p class="profile_card__stats"><span>1,736 reputation</span></p>
+    </div>
+</div>
+
+<% if (user && user.user_id) { %>
+    <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.create_forum]) { %>
+        <div id="new_forum_modal">
+            <div class="relative_reset">
+                <div class="new_forum_modal_container">
+                    <button class="new_forum_modal__close_btn" id="close_new_forum_modal">close <i class="fas fa-times"></i></button>
+                    <button class="new_forum_modal__save_btn" id="save_new_forum_button">save forum <span><i class="far fa-save"></i></span></button>
+
+                    <form id="new_forum_modal_form">
+                        <p class="main_heading">New Forum</p>
+                        <span class="block_divider"></span>
+                        <div class="new_forum_modal_section">
+                            <span class="input_container"><input name="title" type="text" placeholder="Forum Title"></span>
+                            <label>Input the title of the new forum. (Max 50 characters)</label>
+
+                            <span class="section_spacer"></span>
+                            <span class="input_container"><textarea name="description" placeholder="Forum Description"></textarea></span>
+                            <label>Input the description of the new forum. (Max 100 characters)</label>
+
+                            <span class="section_spacer"></span>
+                            <span class="input_container">
+                                <select name="category">
+                                    <% categories.forEach(function(category) { %>
+                                        <option value="<%= category.title.toLowerCase() %>"><%= category.title %></option>
+                                    <% }); %>
+                                    <option value="new category">+ New Category</option>
+                                </select>
+                            </span>
+                            <span class="input_container" id="new_category"><input name="new_category" type="text" placeholder="New Category Title"></span>
+                            <label>Select a category for the new forum.</label>
+
+                            <span class="section_spacer"></span>
+                            <span class="input_container_checkbox">
+                                <input type="checkbox" id="lock_forum" name="locked">
+                                <label for="lock_forum" title="Prevents anyone with a role less than '<%= perms.forums.post_in_locked_forums %>' from posting in this forum.">Locked Forum?</label>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% } %>
+<% } %>
+
+<div class="container">
+    <div id="breadcrumbs">
+        <a href="/">Home</a>
+        <span></span>
+        <a href="/forums">Forums</a>
+    </div>
+    <% if (user && user.user_id) { %>
+        <div id="action_bar">
+            <div class="right_block">
+                <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.create_forum]) { %>
+                    <button id="open_new_forum_modal"><i class="fas fa-folder-plus"></i> New Forum</button>
+                <% } %>
+                <button id="reorder_category_btn" title="Change the order in which categories appear for you."><i class="fas fa-arrows-alt"></i> Reorder Categories</button>
+            </div>
+        </div>
+    <% } %>
+    <div class="forum_container">
+        <div class="left_block">
+            <div id="category_sort">
+                <% categories.forEach(function(category) { %>
+                    <div class="category_container" data-category-id="<%= category.id %>">
+                        <p class="category_title"><span><%= category.title %></span><span>Latest</span></p>
+                        <div class="forum_sort">
+                            <% forums.forEach(function(forum) { %>
+                                <% if (forum.category_id == category.id) { %>
+                                    <div class="forum table" data-forum-id="<%= forum.id %>">
+                                        <div class="title_block table-cell">
+                                            <div class="table-cell">
+                                                <div class="table">
+                                                    <div class="main_icon table-cell">
+                                                        <p><i class="far fa-circle"></i></p>
+                                                    </div>
+                                                    <div class="table-cell">
+                                                        <p class="title" title="<%= forum.description %>"><a href="#"><% if (forum.is_locked) { %><i class="fas fa-lock"></i><% } %> <%= forum.title %></a></p>
+                                                        <p class="thread_counts">
+                                                            <span><i class="far fa-comment"></i> <%= forum.thread_count %></span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="latest_block table-cell">
+                                            <% if (forum.latestThread) { %>
+                                                <p><a href="#" title="<%= forum.latestThread.title %>"><%= forum.latestThread.title %></a></p>
+                                                <p><a href="/profile/<%= forum.latestThread.author_username %>" class="username_hoverable" data-username="<%= forum.latestThread.author_username %>"><%= forum.latestThread.author_username %></a>, <span class="format_date" data-timestamp="<%= forum.latestThread.date_created %>" data-format="ddd [at] h:mm A" data-local='true'></span></p>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                        <% if (user && user.user_id) { %>
+                            <div class="category_action_bar">
+                                <button title="Reorder Forums" class="reorder_forums_btn"><i class="fas fa-arrows-alt"></i></button>
+                                <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.rename_category]) { %>
+                                    <button title="Rename Category" class="rename_category_btn" data-category-id='<%= category.id %>'><i class="fas fa-pencil-alt"></i></button>
+                                <% } %>
+                                <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.delete_category]) { %>
+                                    <button class="delete delete_category_btn" title="Delete Category" data-category-id='<%= category.id %>'><i class="far fa-trash-alt"></i></button>
+                                <% } %>
+                            </div>
+                        <% } %>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+        <div class="right_block">
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<script src="/js/forums.js"></script>
+<% include ../partials/footer %>

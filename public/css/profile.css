@@ -1,0 +1,294 @@
+#cover {
+    height: 450px;
+    background-position: bottom;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#profile_card {
+    background-color: #fff;
+    width: 40%;
+    max-width: 300px;
+    min-width: 200px;
+    position: absolute;
+    display: block;
+    top: -250px;
+    left: 0;
+    border-radius: 8px;
+}
+
+#profile_card .profile_card__avatar {
+    width: 100%;
+    padding-bottom: 100%;
+    background-position: center;
+    background-size: cover;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    position: relative;
+}
+
+#profile_card .profile_card__avatar .profile_card__username {
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 50px;
+    letter-spacing: 3px;
+    font-weight: 300;
+    color: #fff;
+    position: absolute;
+    display: inline-block;
+    left: 120%;
+    bottom: 35%;
+    white-space: nowrap;
+    text-shadow: 0px 0px 3px rgba(150, 150, 150, 1);
+}
+
+#profile_card .profile_card__avatar .profile_card__username .profile_card__last_seen {
+    font-size: 18px;
+    display: block;
+    white-space: nowrap;
+    margin-top: 10px;
+    text-shadow: 0px 0px 3px rgba(150, 150, 150, 1);
+}
+
+#profile_card .profile_card__body {
+    width: 100%;
+    padding: 22px 35px;
+    box-sizing: border-box;
+    font-family: "Roboto", Arial, Sans-serif;
+}
+
+#profile_card .profile_card__body p.heading {
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #282C34;
+}
+
+#profile_card .profile_card__body p.content {
+    width: 100%;
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    color: #727D92;
+}
+
+#profile_card .profile_card__body span.seperator {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin: 20px 0;
+}
+
+#profile_card .profile_card__body div.info p {
+    width: 100%;
+    display: block;
+    margin-bottom: 15px;
+    font-size: 17px;
+    font-weight: 500;
+    color: #727D92;
+}
+
+#profile_card .profile_card__body div.info p span {
+    color: #282C34;
+    font-weight: 700;
+    float: right;
+}
+
+.profile_body {
+    width: 100%;
+}
+
+.profile_body .right_block {
+    padding: 15px;
+    width: calc(100% - 400px);
+    float: right;
+}
+
+.profile_body .sub_container {
+    padding: 15px;
+    background: #fff;
+    width: 100%;
+    margin-top: 40px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.profile_body .sub_container.breadcrumb_container {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.profile_body .sub_container .breadcrumbs {
+    width: 100%;
+    position: relative;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.profile_body .sub_container .breadcrumbs a {
+    display: inline-block;
+    padding: 10px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    float: left;
+}
+
+.profile_body .sub_container .breadcrumbs .slant {
+    display: block;
+    float: left;
+    background: #36393F;
+    width: 1px;
+    height: 100%;
+    transform: rotate(8deg);
+    opacity: 0.2;
+}
+
+.profile_body .follow_button {
+    min-width: 100px;
+    position: absolute;
+    right: 0;
+    top: -120px;
+}
+
+.profile_body .follow_button button {
+    position: relative;
+    background: none;
+    width: 100%;
+    padding: 15px 20px;
+    outline: none;
+    border: none;
+    background-color: #fff;
+    font-family: "Roboto", Arial, Sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 40px;
+    white-space: nowrap;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.profile_body .follow_button button:hover {
+    background-color: #E5E5E5;
+}
+
+.profile_body .follow_button button.disabled {
+    background-color: #ACB0B8;
+    cursor: not-allowed;
+}
+
+/* Ribbon */
+#ribbon-container {
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  overflow: visible;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+#ribbon-container:before {
+  content: "";
+  height: 0;
+  width: 0;
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  border-top: 29px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 29px solid rgba(0, 0, 0, 0.3);
+  border-right: 29px solid rgba(0, 0, 0, 0.3);
+  border-left: 29px solid transparent;
+}
+
+#ribbon-container:after {
+  content: "";
+  height: 3px;
+  background: rgba(0, 0, 0, 0.3);
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  left: 58px;
+  right: 3px;
+}
+
+#ribbon-container a {
+  display: block;
+  padding: 20px;
+  position: relative;
+  text-transform: capitalize;
+  overflow: visible;
+  height: 58px;
+  box-sizing: border-box;
+  margin-left: 29px;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font-family: "Roboto", Arial, Sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  cursor: auto;
+}
+
+#ribbon-container a.administrator {
+    background: #F92929;
+}
+#ribbon-container a.moderator {
+    background: #226ECC;
+}
+#ribbon-container a.member {
+    background: #1FEFA4;
+}
+
+#ribbon-container a:after {
+  content: "";
+  height: 0;
+  width: 0;
+  display: block;
+  position: absolute;
+  bottom: -15px;
+  right: 0;
+  border-right: 15px solid transparent;
+}
+
+#ribbon-container a.administrator:after {
+    border-top: 15px solid #D20606;
+}
+#ribbon-container a.moderator:after {
+    border-top: 15px solid #1D5EAD;
+}
+#ribbon-container a.member:after {
+    border-top: 15px solid #0FD78E;
+}
+
+#ribbon-container a:before {
+  content: "";
+  height: 0;
+  width: 0;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -29px;
+  border-right: 29px solid transparent;
+  border-left: 29px solid transparent;
+}
+
+#ribbon-container a.administrator:before {
+    border-top: 29px solid #F92929;
+    border-bottom: 29px solid #F92929;
+}
+#ribbon-container a.moderator:before {
+    border-top: 29px solid #226ECC;
+    border-bottom: 29px solid #226ECC;
+}
+#ribbon-container a.member:before {
+    border-top: 29px solid #1FEFA4;
+    border-bottom: 29px solid #1FEFA4;
+}
