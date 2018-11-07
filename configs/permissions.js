@@ -3,6 +3,7 @@
 exports.forums = {
     view_forums: "Everyone",
     create_forum: "Administrator",
+    create_thread: "Member",
     delete_category: "Administrator",
     rename_category: "Administrator",
     reorder_category: "Member", // Only on client side
