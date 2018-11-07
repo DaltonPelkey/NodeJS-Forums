@@ -1,5 +1,6 @@
 const { querydb } = require('./utils');
 const logger = require('./logger');
+const slug = require('slug');
 
 exports.getCategory = async title => {
     const query = `SELECT * FROM forum_categories WHERE LOWER(title) = ?`;
@@ -16,10 +17,11 @@ exports.addCategory = async category => {
 };
 
 exports.newForum = async (title, desc, category_id, locked) => {
-    const query = `INSERT INTO forums (title, description, category_id, is_locked) VALUES(?, ?, ?, ?)`;
     locked = locked == 'true' ? 1 : 0;
-    const forum_id = await querydb(query, [title, desc, category_id, locked]).catch(logger.error);
-    return forum_id.insertId;
+    const forum = await querydb(`INSERT INTO forums (title, description, category_id, is_locked) VALUES(?, ?, ?, ?)`, [title, desc, category_id, locked]).catch(logger.error);
+    const forumSlug = `${forum.insertId}-${slug(title, {lower: true})}`;
+    await querydb("UPDATE forums SET slug = ? WHERE id = ?", [forumSlug, forum.insertId]).catch(logger.error);
+    return forum.insertId;
 };
 
 exports.getForums = async () => {

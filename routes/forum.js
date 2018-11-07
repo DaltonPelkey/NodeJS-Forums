@@ -60,6 +60,10 @@ router.get('/', roles.minForumRole(perms.forums.view_forums), async (req, res) =
     res.render('forum/forums', {title: "Forums", forums: forums, categories: categories});
 });
 
+router.get('/:slug', async (req, res) => {
+    
+});
+
 router.post('/', roles.minForumRole(perms.forums.create_forum), async (req, res) => {
     const newForum = req.body.forum;
     const category = await forum.getCategory(newForum.category).catch(logger.error);

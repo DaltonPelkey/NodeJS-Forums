@@ -119,6 +119,11 @@ $(document).ready(function() {
         openNewForumModal();
     });
 
+    if ($('#new_forum_modal_form select option:last-of-type').is(':selected')) {
+        $('#new_category').show();
+        $('#new_category').next().html('Input the title of the new category. (Max 50 characters)');
+    }
+
     $('#new_forum_modal_form select').on('change', function() {
         if ($(this).find('option:last-of-type').is(':selected')) {
             $('#new_category').show();
