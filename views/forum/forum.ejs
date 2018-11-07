@@ -1,0 +1,96 @@
+<% include ../partials/header %>
+<link rel="stylesheet" type="text/css" href="/css/global.forum.css">
+<link rel="stylesheet" type="text/css" href="/css/forum.css">
+
+<!-- Variable definitions for external script -->
+<script>
+    var currentUser = <%- JSON.stringify(user) %>;
+    var perms = <%- JSON.stringify(perms) %>;
+</script>
+
+<div id="cover"></div>
+
+<div id="profile_card">
+    <div class="profile_card__avatar"><span></span></div>
+    <div class="profile_card__info">
+        <p class="profile_card__username">Username</p>
+        <p class="profile_card__forum_role">Member</p>
+        <p class="profile_card__bio">This user has not set their bio yet.</p>
+        <p class="profile_card__stats"><span>1,736 reputation</span></p>
+    </div>
+</div>
+
+<% if (user && user.user_id) { %>
+    <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.create_forum]) { %>
+        <div id="new_forum_modal">
+            <div class="relative_reset">
+                <div class="new_forum_modal_container">
+                    <button class="new_forum_modal__close_btn" id="close_new_forum_modal">close <i class="fas fa-times"></i></button>
+                    <button class="new_forum_modal__save_btn" id="save_new_forum_button">save forum <span><i class="far fa-save"></i></span></button>
+
+                    <form id="new_forum_modal_form">
+                        <p class="main_heading">New Forum</p>
+                        <span class="block_divider"></span>
+                        <div class="new_forum_modal_section">
+                            <span class="input_container"><input name="title" type="text" placeholder="Forum Title"></span>
+                            <label>Input the title of the new forum. (Max 50 characters)</label>
+
+                            <span class="section_spacer"></span>
+                            <span class="input_container"><textarea name="description" placeholder="Forum Description"></textarea></span>
+                            <label>Input the description of the new forum. (Max 100 characters)</label>
+
+                            <span class="section_spacer"></span>
+                            <span class="input_container">
+                                <select name="category">
+                                    <% categories.forEach(function(category) { %>
+                                        <option value="<%= category.title.toLowerCase() %>"><%= category.title %></option>
+                                    <% }); %>
+                                    <option value="new category">+ New Category</option>
+                                </select>
+                            </span>
+                            <span class="input_container" id="new_category"><input name="new_category" type="text" placeholder="New Category Title"></span>
+                            <label>Select a category for the new forum.</label>
+
+                            <span class="section_spacer"></span>
+                            <span class="input_container_checkbox">
+                                <input type="checkbox" id="lock_forum" name="locked">
+                                <label for="lock_forum" title="Prevents anyone with a role less than '<%= perms.forums.post_in_locked_forums %>' from posting in this forum.">Locked Forum?</label>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% } %>
+<% } %>
+
+<div class="container">
+    <div id="breadcrumbs">
+        <a href="/">Home</a>
+        <span></span>
+        <a href="/forums">Forums</a>
+    </div>
+    <% if (user && user.user_id) { %>
+        <div id="action_bar">
+            <div class="right_block">
+                <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.create_forum]) { %>
+                    <button id="open_new_forum_modal"><i class="fas fa-folder-plus"></i> New Forum</button>
+                <% } %>
+                <% if ((perms.levels[user.forum_role] >= perms.levels[perms.forums.create_thread]) && !forum.is_locked) { %>
+                    <button id="open_new_thread_modal"><i class="fas fa-plus"></i> New Thread</button>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+    <div class="forum_container">
+        <div class="left_block">
+
+        </div>
+        <div class="right_block">
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<script src="/js/forum.js"></script>
+<% include ../partials/footer %>

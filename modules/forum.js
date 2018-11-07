@@ -47,7 +47,7 @@ exports.getForums = async parent_id => {
     return forums;
 };
 
-exports.getThreads = async forum_id => {
+exports.getThreads = async (forum_id, page = 1, itemsPerPage = 50) => {
     const query = `SELECT a.*, COUNT(b.id) AS comment_count FROM forum_threads a LEFT JOIN forum_comments b ON (a.id = b.thread_id) WHERE a.id = ? GROUP BY id ORDER BY a.date_created DESC LIMIT ${(page - 1) * itemsPerPage}, ${itemsPerPage}`;
     const threads = await querydb(query, forum_id).catch(logger.error);
     const count = await querydb("SELECT COUNT(*) FROM forum_threads WHERE forum_id = ?", forum_id).catch(logger.error);

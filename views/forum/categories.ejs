@@ -1,5 +1,6 @@
 <% include ../partials/header %>
-<link rel="stylesheet" type="text/css" href="/css/forums.css">
+<link rel="stylesheet" type="text/css" href="/css/global.forum.css">
+<link rel="stylesheet" type="text/css" href="/css/categories.css">
 
 <!-- Variable definitions for external script -->
 <script>
@@ -96,7 +97,7 @@
                                                         <p><i class="far fa-circle"></i></p>
                                                     </div>
                                                     <div class="table-cell">
-                                                        <p class="title" title="<%= forum.description %>"><a href="#"><% if (forum.is_locked) { %><i class="fas fa-lock"></i><% } %> <%= forum.title %></a></p>
+                                                        <p class="title" title="<%= forum.description %>"><a href="/forums/<%= forum.slug %>"><% if (forum.is_locked) { %><i class="fas fa-lock"></i><% } %> <%= forum.title %></a></p>
                                                         <p class="thread_counts">
                                                             <span><i class="far fa-comment"></i> <%= forum.thread_count %></span>
                                                         </p>
@@ -135,5 +136,5 @@
     </div>
 </div>
 
-<script src="/js/forums.js"></script>
+<script src="/js/categories.js"></script>
 <% include ../partials/footer %>
