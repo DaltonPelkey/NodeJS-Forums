@@ -24,6 +24,11 @@ exports.newForum = async (title, desc, category_id, locked) => {
     return forum.insertId;
 };
 
+exports.getForum = async id => {
+    const forum = await querydb("SELECT * FROM forums WHERE id = ?", id).catch(logger.error);
+    return forum;
+};
+
 exports.getForums = async parent_id => {
     let query, forums;
     if (!parent_id) {
