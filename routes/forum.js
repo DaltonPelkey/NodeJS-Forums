@@ -63,7 +63,10 @@ router.get('/', roles.minForumRole(perms.forums.view_forums), async (req, res) =
 router.get('/:slug', async (req, res) => {
     const parent_id = req.params.slug .split('-')[0];
     if (!parent_id) return res.sendStatus(404);
-    const childForums = forum.getForums(parent_id);
+    const forum = await forum.getForum(parent_id);
+    const childForums = await forum.getForums(parent_id);
+    const threads = await forums.getThreads(parent_id);
+    res.render('forum/forum', {title: forum[0].title, childForums: childForums, threads: threads});
 });
 
 router.post('/', roles.minForumRole(perms.forums.create_forum), async (req, res) => {
