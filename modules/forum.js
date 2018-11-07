@@ -24,13 +24,27 @@ exports.newForum = async (title, desc, category_id, locked) => {
     return forum.insertId;
 };
 
-exports.getForums = async () => {
-    const query = `select a.*, count(b.id) as thread_count from forums a left join forum_threads b on (a.id = b.forum_id) group by id order by a.weight`;
-    const forums = await querydb(query).catch(logger.error);
+exports.getForums = async parent_id => {
+    let query, forums;
+    if (!parent_id) {
+        query = "SELECT a.*, COUNT(b.id) AS thread_count FROM forums a LEFT JOIN forum_threads b ON (a.id = b.forum_id) GROUP BY id ORDER BY a.weight";
+        forums = await querydb(query).catch(logger.error);
+    } else {
+        query = "SELECT a.*, COUNT(b.id) AS thread_count FROM forums a LEFT JOIN forum_threads b ON (a.id = b.forum_id) WHERE a.parent_forum_id = ? GROUP BY id ORDER BY a.date_created DESC";
+        forums = await querydb(query, parent_id).catch(logger.error);
+    }
     for (let i = 0; i < forums.length; i++) {
         let latest = await this.getLatestThread(forums[i].id);
+        let children = await this.getChildForums(forums[i].id);
         if (latest.length > 0) forums[i].latestThread = latest[0];
+        if (children.length > 0) forums[i].childForums = children;
     }
+    return forums;
+};
+
+exports.getChildForums = async parent_id => {
+    const query = "SELECT title, description, slug, is_locked FROM forums WHERE parent_forum_id = ?";
+    const forums = querydb(query, parent_id).catch(logger.error);
     return forums;
 };
 

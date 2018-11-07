@@ -57,11 +57,13 @@ router.get('/', roles.minForumRole(perms.forums.view_forums), async (req, res) =
         res.cookie('forumOrder', forumOrder, { maxAge: 159325993469598, httpOnly: true, overwrite: true });
     }
 
-    res.render('forum/forums', {title: "Forums", forums: forums, categories: categories});
+    res.render('forum/categories', {title: "Forums", forums: forums, categories: categories});
 });
 
 router.get('/:slug', async (req, res) => {
-    
+    const parent_id = req.params.slug .split('-')[0];
+    if (!parent_id) return res.sendStatus(404);
+    const childForums = forum.getForums(parent_id);
 });
 
 router.post('/', roles.minForumRole(perms.forums.create_forum), async (req, res) => {
