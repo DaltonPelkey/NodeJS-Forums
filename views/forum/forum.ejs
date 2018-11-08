@@ -21,7 +21,7 @@
 </div>
 
 <% if (user && user.user_id) { %>
-    <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.create_forum]) { %>
+    <% if ((!forum.is_locked || hasPermission('post_in_locked_forums')) && hasPermission('create_forum')) { %>
         <div id="new_forum_modal">
             <div class="relative_reset">
                 <div class="new_forum_modal_container">
@@ -29,6 +29,7 @@
                     <button class="new_forum_modal__save_btn" id="save_new_forum_button">save forum <span><i class="far fa-save"></i></span></button>
 
                     <form id="new_forum_modal_form">
+                        <input type="hidden" name="parent_forum_id" value="<%= forum.id %>">
                         <p class="main_heading">New Forum</p>
                         <span class="block_divider"></span>
                         <div class="new_forum_modal_section">
@@ -38,18 +39,6 @@
                             <span class="section_spacer"></span>
                             <span class="input_container"><textarea name="description" placeholder="Forum Description"></textarea></span>
                             <label>Input the description of the new forum. (Max 100 characters)</label>
-
-                            <span class="section_spacer"></span>
-                            <span class="input_container">
-                                <select name="category">
-                                    <% categories.forEach(function(category) { %>
-                                        <option value="<%= category.title.toLowerCase() %>"><%= category.title %></option>
-                                    <% }); %>
-                                    <option value="new category">+ New Category</option>
-                                </select>
-                            </span>
-                            <span class="input_container" id="new_category"><input name="new_category" type="text" placeholder="New Category Title"></span>
-                            <label>Select a category for the new forum.</label>
 
                             <span class="section_spacer"></span>
                             <span class="input_container_checkbox">
@@ -71,20 +60,51 @@
         <a href="/forums">Forums</a>
     </div>
     <% if (user && user.user_id) { %>
-        <div id="action_bar">
-            <div class="right_block">
-                <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.create_forum]) { %>
-                    <button id="open_new_forum_modal"><i class="fas fa-folder-plus"></i> New Forum</button>
-                <% } %>
-                <% if ((perms.levels[user.forum_role] >= perms.levels[perms.forums.create_thread]) && !forum.is_locked) { %>
-                    <button id="open_new_thread_modal"><i class="fas fa-plus"></i> New Thread</button>
-                <% } %>
+        <% if (!forum.is_locked || hasPermission('post_in_locked_forums')) { %>
+            <div id="action_bar">
+                <div class="right_block">
+                    <% if (hasPermission('create_forum')) { %>
+                        <button id="open_new_forum_modal"><i class="fas fa-folder-plus"></i> New Forum</button>
+                    <% } %>
+                    <% if (hasPermission('create_thread')) { %>
+                        <button id="open_new_thread_modal"><i class="fas fa-plus"></i> New Thread</button>
+                    <% } %>
+                </div>
             </div>
-        </div>
+        <% } %>
     <% } %>
     <div class="forum_container">
         <div class="left_block">
-
+            <% if (childForums.length > 0) { %>
+                <div class="category_container">
+                    <p class="category_title"><span><%= forum.title %></span><span>Latest</span></p>
+                        <% childForums.forEach(function(forum) { %>
+                            <div class="forum table">
+                                <div class="title_block table-cell">
+                                    <div class="table-cell">
+                                        <div class="table">
+                                            <div class="main_icon table-cell">
+                                                <p><i class="far fa-circle"></i></p>
+                                            </div>
+                                            <div class="table-cell">
+                                                <p class="title" title="<%= forum.description %>"><a href="/forums/<%= forum.slug %>"><% if (forum.is_locked) { %><i class="fas fa-lock"></i><% } %> <%= forum.title %></a></p>
+                                                <p class="thread_counts">
+                                                    <span><i class="far fa-comment"></i> <%= forum.thread_count %></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="latest_block table-cell">
+                                    <% if (forum.latestThread) { %>
+                                        <p><a href="#" title="<%= forum.latestThread.title %>"><%= forum.latestThread.title %></a></p>
+                                        <p><a href="/profile/<%= forum.latestThread.author_username %>" class="username_hoverable" data-username="<%= forum.latestThread.author_username %>"><%= forum.latestThread.author_username %></a>, <span class="format_date" data-timestamp="<%= forum.latestThread.date_created %>" data-format="ddd [at] h:mm A" data-local='true'></span></p>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% }); %>
+                </div>
+            <% } %>
         </div>
         <div class="right_block">
             <span></span>

@@ -21,7 +21,7 @@
 </div>
 
 <% if (user && user.user_id) { %>
-    <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.create_forum]) { %>
+    <% if (hasPermission('create_forum')) { %>
         <div id="new_forum_modal">
             <div class="relative_reset">
                 <div class="new_forum_modal_container">
@@ -73,7 +73,7 @@
     <% if (user && user.user_id) { %>
         <div id="action_bar">
             <div class="right_block">
-                <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.create_forum]) { %>
+                <% if (hasPermission('create_forum')) { %>
                     <button id="open_new_forum_modal"><i class="fas fa-folder-plus"></i> New Forum</button>
                 <% } %>
                 <button id="reorder_category_btn" title="Change the order in which categories appear for you."><i class="fas fa-arrows-alt"></i> Reorder Categories</button>
@@ -118,10 +118,10 @@
                         <% if (user && user.user_id) { %>
                             <div class="category_action_bar">
                                 <button title="Reorder Forums" class="reorder_forums_btn"><i class="fas fa-arrows-alt"></i></button>
-                                <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.rename_category]) { %>
+                                <% if (hasPermission('rename_category')) { %>
                                     <button title="Rename Category" class="rename_category_btn" data-category-id='<%= category.id %>'><i class="fas fa-pencil-alt"></i></button>
                                 <% } %>
-                                <% if (perms.levels[user.forum_role] >= perms.levels[perms.forums.delete_category]) { %>
+                                <% if (hasPermission('delete_category')) { %>
                                     <button class="delete delete_category_btn" title="Delete Category" data-category-id='<%= category.id %>'><i class="far fa-trash-alt"></i></button>
                                 <% } %>
                             </div>
