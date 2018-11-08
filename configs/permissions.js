@@ -2,7 +2,7 @@
 //Role order: Administrator, Moderator, Member
 exports.forums = {
     view_forums: "Everyone",
-    create_forum: "Administrator",
+    create_forum: "Moderator",
     create_thread: "Member",
     delete_category: "Administrator",
     rename_category: "Administrator",
@@ -10,7 +10,7 @@ exports.forums = {
     reorder_default_category: "Administrator", // Change default order for all users who haven't set their own
     reorder_forum: "Member", // Only on client side
     reorder_default_forum: "Administrator", // Change default order for all users who haven't set their own
-    post_in_locked_forums: "Moderator"
+    post_in_locked_forums: "Administrator"
 };
 
 exports.api = {
