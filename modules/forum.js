@@ -16,9 +16,15 @@ exports.addCategory = async category => {
     return newCategory[0];
 };
 
-exports.newForum = async (title, desc, category_id, locked) => {
+exports.newForum = async (title, desc, category_id, locked, parent_forum_id) => {
     locked = locked == 'true' ? 1 : 0;
-    const forum = await querydb(`INSERT INTO forums (title, description, category_id, is_locked) VALUES(?, ?, ?, ?)`, [title, desc, category_id, locked]).catch(logger.error);
+    const columns = ['title', 'description', 'is_locked', 'parent_forum_id'];
+    const values = [title, desc, locked, parent_forum_id];
+    if (category_id) {
+        columns.push('category_id');
+        values.push(category_id);
+    }
+    const forum = await querydb(`INSERT INTO forums (${columns.join(',')}) VALUES(${'?'.repeat(values.length).split('').join(',')})`, values).catch(logger.error);
     const forumSlug = `${forum.insertId}-${slug(title, {lower: true})}`;
     await querydb("UPDATE forums SET slug = ? WHERE id = ?", [forumSlug, forum.insertId]).catch(logger.error);
     return forum.insertId;

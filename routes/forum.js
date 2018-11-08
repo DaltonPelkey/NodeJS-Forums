@@ -69,13 +69,24 @@ router.get('/:slug', async (req, res) => {
     const childForums = await forum.getForums(parent_id);
     const threads = await forum.getThreads(parent_id, page, itemsPerPage);
     const categories = await forum.getCategories();
-    res.render('forum/forum', {title: f[0].title, forum: f, childForums: childForums, threads: threads, categories: categories});
+    res.render('forum/forum', {title: f[0].title, forum: f[0], childForums: childForums, threads: threads, categories: categories});
 });
 
 router.post('/', roles.minForumRole(perms.forums.create_forum), async (req, res) => {
     const newForum = req.body.forum;
-    const category = await forum.getCategory(newForum.category).catch(logger.error);
-    await forum.newForum(newForum.title, newForum.description, category.id, newForum.locked).catch(logger.error);
+    if (newForum.parent_forum_id) {
+        const parentForum = await forum.getForum(newForum.parent_forum_id);
+        if (parentForum[0].is_locked) roles.minForumRole(perms.forums.post_in_locked_forums);
+    }
+    let category;
+    if (newForum.category) {
+        category = await forum.getCategory(newForum.category).catch(logger.error);
+        category = category.id;
+    } else {
+        category = null;
+    }
+    const parent = newForum.parent_forum_id ? newForum.parent_forum_id : 'NULL';
+    await forum.newForum(newForum.title, newForum.description, category, newForum.locked, parent).catch(logger.error);
     res.send(true);
 });
 
