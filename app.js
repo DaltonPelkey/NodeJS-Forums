@@ -60,6 +60,11 @@ const init = async () => {
         res.locals.user = req.session;
         res.locals.perms = perms;
         res.locals.app_name = process.env.APP_NAME;
+        if (req.session && req.session.user_id) {
+            res.locals.hasPermission = (key) => {
+                return perms.levels[req.session.forum_role] >= perms.levels[perms.forums[key]]
+            };
+        }
         if (req.session && req.session.user_id) updateLastSeen(req.session.user_id);
         next();
     });
